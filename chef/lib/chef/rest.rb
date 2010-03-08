@@ -319,6 +319,9 @@ class Chef
           end
         end
         raise
+      rescue Net::HTTPBadResponse => e
+        Chef::Log.error("Bad response received from #{url.host}:#{url.port} for #{req.path}.")
+        raise e
       end
     end
     
